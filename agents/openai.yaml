@@ -1,0 +1,15 @@
+interface:
+  display_name: "Figma Component Mapper"
+  short_description: "Map Figma designs to generic component-library semantics and implementation decisions"
+  default_prompt: "Use $figma-component-mapper to turn a Figma design or screenshot into framework-agnostic component-library mapping decisions. Always output a Mapping Report before implementation. In the Mapping Report, include provider_source and fallback_notes whenever provider information is incomplete. When resolving library facts, first look for an available component-library provider and prefer MCP-backed structured facts when available; use skill-backed guidance for project conventions, strategy, and implementation constraints; use hybrid mode when both exist. If you identify a dialog, you must map dialog-header, dialog-body, and dialog-footer, and continue decomposing dialog-body into key child regions instead of treating it as a black box. If you identify an icon, you must first determine icon_role and host_component, then produce semantic candidates, asset candidates, and a final icon mapping instead of guessing directly from the layer name. If a target component can be matched, you must exhaust existing component-library capabilities before recommending style overrides. Do not replace a valid capability mapping with direct CSS."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "figma"
+      description: "Figma MCP server"
+      transport: "streamable_http"
+      url: "https://mcp.figma.com/mcp"
+
+policy:
+  allow_implicit_invocation: true
